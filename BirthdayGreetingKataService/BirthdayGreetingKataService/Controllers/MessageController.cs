@@ -28,9 +28,12 @@ namespace BirthdayGreetingKataService.Controllers
         )
         {
             string query = @"
-                SELECT * 
-                FROM 
-                    members
+                SELECT ""FirstName"", ""LastName""
+                FROM
+                 members
+                WHERE
+                 EXTRACT (MONTH FROM ""DateofBirth"") = @month AND
+                 EXTRACT (DAY FROM ""DateofBirth"") = @day 
             ";
 
             string sqlDataSource = _configuration.GetConnectionString("PostgresqlCon");
@@ -41,9 +44,15 @@ namespace BirthdayGreetingKataService.Controllers
                 connection.Open();
                 using (NpgsqlCommand sqlCommand = new NpgsqlCommand(query, connection))
                 {
+                    sqlCommand.Parameters.AddWithValue("@month", month);
+                    sqlCommand.Parameters.AddWithValue("@day", day);
                     NpgsqlDataReader dataReader = sqlCommand.ExecuteReader();
                     DataTable dataTable = new DataTable();
                     dataTable.Load(dataReader);
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        string firstName = row.Field<string>("FirstName");
+                    }
                 }
             }
             return new string[] { "value1", "value2" };
