@@ -22,10 +22,10 @@ namespace BirthdayGreetingKataService.Controllers
 
         // GET: api/<MessageController>
         [HttpGet]
-        [Route("birthday")]
-        public IEnumerable<string> GetMembersWithSpecificDateofBirth(
-            [FromQuery(Name = "month")] int month,
-            [FromQuery(Name = "day")] int day
+        [Route("search")]
+        public IEnumerable<string> FilterMembers(
+            [FromQuery(Name = "month")] int? month = 8,
+            [FromQuery(Name = "day")] int? day = 8
         )
         {
             string query = @"
@@ -58,7 +58,7 @@ namespace BirthdayGreetingKataService.Controllers
             }
             return new string[] { "value1", "value2" };
         }
-        
+
         private string LoadPassword(string filePath)
         {
             string password = System.IO.File.ReadAllText(filePath);
