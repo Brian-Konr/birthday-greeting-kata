@@ -22,7 +22,8 @@ namespace BirthdayGreetingKataService.Controllers
 
         // GET: api/<MessageController>
         [HttpGet]
-        public IEnumerable<string> Get(
+        [Route("birthday")]
+        public IEnumerable<string> GetMembersWithSpecificDateofBirth(
             [FromQuery(Name = "month")] int month,
             [FromQuery(Name = "day")] int day
         )
