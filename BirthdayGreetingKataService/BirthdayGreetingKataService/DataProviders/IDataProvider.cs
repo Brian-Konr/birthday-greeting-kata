@@ -7,10 +7,6 @@ namespace BirthdayGreetingKataService.DataProviders
     /// </summary>
     public interface IDataProvider
     {
-        List<Member> FilterMembersByDateofBirth(int month, int day);
-
-        List<Member> FilterMembersByGender(string gender);
-
-        List<Member> FilterMembersByElder(int threshold = 49);
+        List<Member> FilterMembers(int? month, int? day, string? gender, bool? isElder);
     }
 }
