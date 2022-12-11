@@ -1,6 +1,7 @@
 ﻿using BirthdayGreetingKataService.Models;
 using Npgsql;
 using System.Data;
+using System.Text;
 
 namespace BirthdayGreetingKataService.DataProviders
 {
@@ -16,20 +17,34 @@ namespace BirthdayGreetingKataService.DataProviders
         public List<Member> FilterMembers(int? month, int? day, string? gender, bool? isElder)
         {
             var filteredMembers = new List<Member>();
-            // TODO: handle queries
-            string query = @"
-                SELECT *
-                FROM
-                 members
-                WHERE
-                 EXTRACT (MONTH FROM ""DateofBirth"") = @month AND
-                 EXTRACT (DAY FROM ""DateofBirth"") = @day 
-            ";
+            string sqlString = "SELECT * FROM members WHERE ";
+            StringBuilder query = new StringBuilder();
+            if (month != null)
+            {
+                query.Append($"EXTRACT (MONTH FROM \"DateofBirth\") = {month} ");
+            }
+            if (day != null)
+            {
+                if(query.Length > 0)
+                {
+                    query.Append("AND ");
+                }
+                query.Append($"EXTRACT (DAY FROM \"DateofBirth\") = {day} ");
+            }
+            //string _query = @"
+            //    SELECT *
+            //    FROM
+            //     members
+            //    WHERE
+            //     EXTRACT (MONTH FROM ""DateofBirth"") = @month AND
+            //     EXTRACT (DAY FROM ""DateofBirth"") = @day 
+            //";
+            sqlString += query.ToString();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
             {
                 connection.Open();
-                using (NpgsqlCommand sqlCommand = new NpgsqlCommand(query, connection))
+                using (NpgsqlCommand sqlCommand = new NpgsqlCommand(sqlString, connection))
                 {
                     sqlCommand.Parameters.AddWithValue("@month", month);
                     sqlCommand.Parameters.AddWithValue("@day", day);
