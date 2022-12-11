@@ -1,4 +1,5 @@
 ﻿using BirthdayGreetingKataService.DataProviders;
+using BirthdayGreetingKataService.GreetingMessageGenerators;
 using BirthdayGreetingKataService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,22 +16,25 @@ namespace BirthdayGreetingKataService.Controllers
     public class MessageController : ControllerBase
     {
         private readonly IDataProvider _dataProvider;
-        public MessageController(IDataProvider dataProvider)
+
+        private readonly IGreetingMessageGenerator _messageGenerator;
+        public MessageController(IDataProvider dataProvider, IGreetingMessageGenerator messageGenerator)
         {
             _dataProvider = dataProvider;
+            _messageGenerator = messageGenerator;
         }
 
         // GET: api/<MessageController>
         [HttpGet]
         [Route("search")]
-        public ActionResult<List<Member>> FilterMembers(
+        public ActionResult<List<Response>> FilterMembers(
             [FromQuery(Name = "month")] int? month = 8,
             [FromQuery(Name = "day")] int? day = 8
         )
         {
             List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, null, null);
-            string json = JsonConvert.SerializeObject(selectedMembers);
-            return Ok(json);
+            List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
+            return Ok(responses);
         }
     }
 }
