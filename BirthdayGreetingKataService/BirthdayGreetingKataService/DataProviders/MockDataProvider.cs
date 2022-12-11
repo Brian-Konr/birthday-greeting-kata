@@ -27,46 +27,38 @@ namespace BirthdayGreetingKataService.DataProviders
                     firstName: "Robert",
                     lastName: "Yen",
                     gender: "Male",
-                    dateofBirth: GenerateDateTimeFromString("1985/08/08"),
+                    dateofBirth: new DateTime(1985, 8, 8),
                     email: "robert.yen@linecorp.com"
                 ),
                 new Member(
                     firstName: "Cid",
                     lastName: "Change",
                     gender: "Male",
-                    dateofBirth: GenerateDateTimeFromString("1990/10/10"),
+                    dateofBirth: new DateTime(1990, 10, 10),
                     email: "cid.change@linecorp.com"
                 ),
                 new Member(
                     firstName: "Miki",
                     lastName: "Lai",
                     gender: "Female",
-                    dateofBirth: GenerateDateTimeFromString("1993/04/05"),
+                    dateofBirth: new DateTime(1993, 4, 5),
                     email: "miki.lai@linecorp.com"
                 ),
                 new Member(
                     firstName: "Sherry",
                     lastName: "Chen",
                     gender: "Female",
-                    dateofBirth: GenerateDateTimeFromString("1993/08/08"),
+                    dateofBirth: new DateTime(1993, 8, 8),
                     email: "sherry.lai@linecorp.com"
                 ),
                 new Member(
                     firstName: "Peter",
                     lastName: "Wang",
                     gender: "Male",
-                    dateofBirth: GenerateDateTimeFromString("1950/12/22"),
+                    dateofBirth: new DateTime(1950, 12, 22),
                     email: "peter.wang@linecorp.com"
                 )
             };
-        }
-        private DateTime GenerateDateTimeFromString(string date)
-        {
-            return DateTime.ParseExact(
-                date,
-                "yyyy/MM/dd",
-                CultureInfo.InvariantCulture
-            );
         }
     }
 }
