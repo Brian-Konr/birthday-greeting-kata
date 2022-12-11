@@ -4,9 +4,10 @@ namespace BirthdayGreetingKataService.GreetingMessageGenerators
 {
     public class GreetingMessageGeneratorVer1 : IGreetingMessageGenerator
     {
-        public string GenerateGreetingMessage(Member member)
+        public Response GenerateGreetingMessage(Member member)
         {
-            throw new NotImplementedException();
+            string content = $"Happy birthday, dear {member.FirstName}!";
+            return new Response(Constants.MessageTitle, content);
         }
     }
 }

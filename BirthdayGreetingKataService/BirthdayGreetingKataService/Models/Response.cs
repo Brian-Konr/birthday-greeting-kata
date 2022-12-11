@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace BirthdayGreetingKataService.Models
 {
@@ -10,5 +9,11 @@ namespace BirthdayGreetingKataService.Models
 
         [JsonPropertyName("content")]
         public string Content { get; set; }
+
+        public Response(string title, string content)
+        {
+            Title = title;
+            Content = content;
+        }
     }
 }

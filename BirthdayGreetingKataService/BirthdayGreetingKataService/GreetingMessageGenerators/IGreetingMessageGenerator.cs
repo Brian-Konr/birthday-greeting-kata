@@ -4,6 +4,6 @@ namespace BirthdayGreetingKataService.GreetingMessageGenerators
 {
     public interface IGreetingMessageGenerator
     {
-        string GenerateGreetingMessage(Member member);
+        Response GenerateGreetingMessage(Member member);
     }
 }
