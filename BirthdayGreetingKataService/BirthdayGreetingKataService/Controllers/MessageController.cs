@@ -34,7 +34,7 @@ namespace BirthdayGreetingKataService.Controllers
         {
             List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, null, null);
             List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
-            return Ok(responses);
+            return responses.Count > 0 ? Ok(responses) : NotFound(responses);
         }
     }
 }
