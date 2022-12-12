@@ -10,7 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDataProvider, PostgreSqlDataProvider>();
-builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer1>();
+//builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer1>();
+builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer2>();
 
 var app = builder.Build();
 
