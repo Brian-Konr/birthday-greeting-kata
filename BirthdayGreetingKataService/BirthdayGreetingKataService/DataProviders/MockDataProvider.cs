@@ -27,7 +27,7 @@ namespace BirthdayGreetingKataService.DataProviders
             return filteredMembers;
         }
 
-        public List<Member> GenerateAllMembers()
+        public static List<Member> GenerateAllMembers()
         {
             return new List<Member>
             {
