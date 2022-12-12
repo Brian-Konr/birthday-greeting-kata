@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # secret file
 postgre_password.txt
+mongodb_password.txt
