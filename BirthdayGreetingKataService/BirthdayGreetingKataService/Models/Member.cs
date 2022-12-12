@@ -8,10 +8,10 @@ namespace BirthdayGreetingKataService.Models
     [BsonIgnoreExtraElements]
     public class Member
     {
-        [BsonElement("firstName")]
+        [BsonElement("lastName")]
         public string LastName { get; set; }
 
-        [BsonElement("lastName")]
+        [BsonElement("firstName")]
         public string FirstName { get; set; }
 
         [BsonElement("gender")]
