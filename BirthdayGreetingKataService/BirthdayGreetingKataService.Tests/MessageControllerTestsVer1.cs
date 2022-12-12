@@ -11,12 +11,12 @@ namespace BirthdayGreetingKataService.Tests
     {
         [Theory]
         [MemberData(nameof(TestCases.GetDataForDateFiltering), MemberType = typeof(TestCases))]
-        public void FilterMembers_PassExistedDate_ReturnOkAndCorrectResult(int month, int day, List<Response> expectedResult)
+        public void FilterMembers_PassExistedDate_ReturnOk(int month, int day, List<Response> expectedResult)
         {
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
             // assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var returnValues = Assert.IsType<List<Response>>(okResult.Value);
@@ -29,7 +29,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
             // assert
             var okResult = actionResult.Result as OkObjectResult;
             var returnValues = okResult.Value as List<Response>;
