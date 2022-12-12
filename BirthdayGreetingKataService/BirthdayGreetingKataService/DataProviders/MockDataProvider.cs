@@ -16,6 +16,10 @@ namespace BirthdayGreetingKataService.DataProviders
             {
                 filteredMembers = filteredMembers.Where(member => member.DateofBirth.Day == day).ToList();
             }
+            if (gender != null)
+            {
+                filteredMembers = filteredMembers.Where(member => member.Gender.Equals(gender)).ToList();
+            }
             return filteredMembers;
         }
 
