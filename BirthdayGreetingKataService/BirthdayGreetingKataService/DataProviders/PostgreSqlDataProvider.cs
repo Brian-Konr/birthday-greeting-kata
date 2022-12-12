@@ -31,6 +31,14 @@ namespace BirthdayGreetingKataService.DataProviders
                 }
                 query.Append($"EXTRACT (DAY FROM \"DateofBirth\") = {day} ");
             }
+            if (gender != null)
+            {
+                if (query.Length > 0)
+                {
+                    query.Append("AND ");
+                }
+                query.Append($"\"Gender\" = {gender}");
+            }
             sqlString += query.ToString();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
@@ -38,8 +46,6 @@ namespace BirthdayGreetingKataService.DataProviders
                 connection.Open();
                 using (NpgsqlCommand sqlCommand = new NpgsqlCommand(sqlString, connection))
                 {
-                    sqlCommand.Parameters.AddWithValue("@month", month);
-                    sqlCommand.Parameters.AddWithValue("@day", day);
                     NpgsqlDataReader dataReader = sqlCommand.ExecuteReader();
                     DataTable dataTable = new DataTable();
                     dataTable.Load(dataReader);
