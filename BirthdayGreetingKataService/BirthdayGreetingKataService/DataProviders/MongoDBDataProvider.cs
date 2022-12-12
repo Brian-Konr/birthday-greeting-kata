@@ -1,5 +1,6 @@
 ﻿using BirthdayGreetingKataService.Models;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace BirthdayGreetingKataService.DataProviders
@@ -21,7 +22,17 @@ namespace BirthdayGreetingKataService.DataProviders
         }
         public List<Member> FilterMembers(int? month, int? day, string? gender, bool? isElder)
         {
-            return new List<Member>();
+            var list = _members.Find(member => true).ToList();
+            foreach (Member member in list)
+            {
+                member.DateofBirth = member.DateofBirth.AddHours(8);
+            }
+            return list.Where(member =>
+                (month == null || member.DateofBirth.Month == month) &&
+                (day == null || member.DateofBirth.Day == day) &&
+                (gender == null || member.Gender == gender) &&
+                (isElder == null || !isElder.Value || Utils.GetAgeFromDateofBirth(member.DateofBirth) > Constants.ElderThreshold)
+            ).ToList();
         }
     }
 }
