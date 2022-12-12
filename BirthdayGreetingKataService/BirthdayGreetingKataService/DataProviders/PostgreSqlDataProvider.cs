@@ -31,14 +31,6 @@ namespace BirthdayGreetingKataService.DataProviders
                 }
                 query.Append($"EXTRACT (DAY FROM \"DateofBirth\") = {day} ");
             }
-            //string _query = @"
-            //    SELECT *
-            //    FROM
-            //     members
-            //    WHERE
-            //     EXTRACT (MONTH FROM ""DateofBirth"") = @month AND
-            //     EXTRACT (DAY FROM ""DateofBirth"") = @day 
-            //";
             sqlString += query.ToString();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
