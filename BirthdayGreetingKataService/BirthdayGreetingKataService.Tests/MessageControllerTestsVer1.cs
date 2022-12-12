@@ -16,7 +16,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null, null);
             // assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var returnValues = Assert.IsType<List<Response>>(okResult.Value);
@@ -29,7 +29,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null, null);
             // assert
             var notfoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
             var returnValues = Assert.IsType<List<Response>>(notfoundResult.Value);
@@ -42,7 +42,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null, null);
             // assert
             var okResult = actionResult.Result as OkObjectResult;
             var returnValues = okResult.Value as List<Response>;
@@ -68,7 +68,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day, null, null);
             // assert
             var notFoundResult = actionResult.Result as NotFoundObjectResult;
             var returnValues = notFoundResult.Value as List<Response>;

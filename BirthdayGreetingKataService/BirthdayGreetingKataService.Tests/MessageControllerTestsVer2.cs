@@ -20,7 +20,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer2());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(null, null, gender);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(null, null, gender, null);
             // assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var returnValues = Assert.IsType<List<Response>>(okResult.Value);
@@ -33,7 +33,7 @@ namespace BirthdayGreetingKataService.Tests
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer2());
             // act
-            ActionResult<List<Response>> actionResult = messageController.FilterMembers(null, null, gender);
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(null, null, gender, null);
             // assert
             var okResult = actionResult.Result as OkObjectResult;
             var returnValues = okResult.Value as List<Response>;

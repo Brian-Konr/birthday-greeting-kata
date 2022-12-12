@@ -20,6 +20,10 @@ namespace BirthdayGreetingKataService.DataProviders
             {
                 filteredMembers = filteredMembers.Where(member => member.Gender.Equals(gender)).ToList();
             }
+            if (isElder != null && isElder.Value) 
+            {
+                filteredMembers = filteredMembers.Where(member => GetAgeFromDateofBirth(member.DateofBirth) > Constants.ElderThreshold).ToList()
+;           }
             return filteredMembers;
         }
 
@@ -63,6 +67,17 @@ namespace BirthdayGreetingKataService.DataProviders
                     email: "peter.wang@linecorp.com"
                 )
             };
+        }
+
+        private int GetAgeFromDateofBirth(DateTime dateofBirth)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - dateofBirth.Year - 1;
+            if (today.Month < dateofBirth.Month || (today.Month == dateofBirth.Month && today.Day <= dateofBirth.Day))
+            {
+                age++;
+            }
+            return age;
         }
     }
 }
