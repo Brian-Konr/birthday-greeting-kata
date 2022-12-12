@@ -30,10 +30,11 @@ namespace BirthdayGreetingKataService.Controllers
         public ActionResult<List<Response>> FilterMembers(
             [FromQuery(Name = "month")] int? month,
             [FromQuery(Name = "day")] int? day,
-            [FromQuery(Name = "gender")] string? gender
+            [FromQuery(Name = "gender")] string? gender,
+            [FromQuery(Name = "isElder")] bool? isElder
         )
         {
-            List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, gender, null);
+            List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, gender, isElder);
             List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
             return responses.Count > 0 ? Ok(responses) : NotFound(responses);
         }
