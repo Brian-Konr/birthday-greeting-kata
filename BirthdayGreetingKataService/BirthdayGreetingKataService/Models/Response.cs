@@ -15,5 +15,12 @@ namespace BirthdayGreetingKataService.Models
             Title = title;
             Content = content;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            Response comparedResponse = obj as Response;
+            return Title.Equals(comparedResponse.Title) && Content.Equals(comparedResponse.Content);
+        }
     }
 }

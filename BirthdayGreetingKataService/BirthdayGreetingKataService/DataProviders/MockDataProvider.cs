@@ -19,7 +19,7 @@ namespace BirthdayGreetingKataService.DataProviders
             return filteredMembers;
         }
 
-        private List<Member> GenerateAllMembers()
+        public List<Member> GenerateAllMembers()
         {
             return new List<Member>
             {
