@@ -28,11 +28,12 @@ namespace BirthdayGreetingKataService.Controllers
         [HttpGet]
         [Route("search")]
         public ActionResult<List<Response>> FilterMembers(
-            [FromQuery(Name = "month")] int? month = 8,
-            [FromQuery(Name = "day")] int? day = 8
+            [FromQuery(Name = "month")] int? month,
+            [FromQuery(Name = "day")] int? day,
+            [FromQuery(Name = "gender")] string? gender
         )
         {
-            List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, null, null);
+            List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, gender, null);
             List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
             return responses.Count > 0 ? Ok(responses) : NotFound(responses);
         }
