@@ -17,7 +17,11 @@ namespace BirthdayGreetingKataService.DataProviders
         public List<Member> FilterMembers(int? month, int? day, string? gender, bool? isElder)
         {
             var filteredMembers = new List<Member>();
-            string sqlString = "SELECT * FROM members WHERE ";
+            string sqlString = "SELECT * FROM members";
+            if (month != null || day != null || gender != null || (isElder != null && isElder.Value))
+            {
+                sqlString += " WHERE ";
+            }
             StringBuilder query = new StringBuilder();
             if (month != null)
             {
