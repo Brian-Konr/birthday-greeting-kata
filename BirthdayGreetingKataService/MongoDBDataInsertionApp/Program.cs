@@ -1,4 +1,4 @@
-﻿using BirthdayGreetingKataService.DataProviders;
+﻿using BirthdayGreetingKataService;
 using BirthdayGreetingKataService.Models;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
@@ -16,7 +16,7 @@ var db = client.GetDatabase("test");
 var coll = db.GetCollection<Member>("members");
 
 
-var data = MockDataProvider.GenerateAllMembers();
+var data = Utils.GenerateAllMembers();
 coll.InsertMany(data);
 
 Console.WriteLine("Data added successfully!...");
