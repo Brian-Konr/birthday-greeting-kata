@@ -37,7 +37,7 @@ namespace BirthdayGreetingKataService.DataProviders
                 {
                     query.Append("AND ");
                 }
-                query.Append($"\"Gender\" = {gender}");
+                query.Append($"\"Gender\" = '{gender}'");
             }
             sqlString += query.ToString();
 
