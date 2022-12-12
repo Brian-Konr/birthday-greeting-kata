@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDataProvider, PostgreSqlDataProvider>();
 //builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer1>();
 //builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer2>();
-builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer3>();
+//builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer3>();
+builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer4>();
 
 var app = builder.Build();
 
