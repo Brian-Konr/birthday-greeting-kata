@@ -39,6 +39,16 @@ namespace BirthdayGreetingKataService.DataProviders
                 }
                 query.Append($"\"Gender\" = '{gender}'");
             }
+            if (isElder != null && isElder.Value)
+            {
+                string currentDateString = DateTime.Now.ToString("yyyy-MM-dd");
+
+                if (query.Length > 0)
+                {
+                    query.Append("AND ");
+                }
+                query.Append($"DATE_PART('YEAR', AGE('{currentDateString}', \"DateofBirth\")) > 49");
+            }
             sqlString += query.ToString();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
