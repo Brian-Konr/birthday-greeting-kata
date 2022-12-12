@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirthdayGreetingKataService", "BirthdayGreetingKataService\BirthdayGreetingKataService.csproj", "{9CA22567-0F6B-43D3-B766-EC641EACF5DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirthdayGreetingKataService.Tests", "BirthdayGreetingKataService.Tests\BirthdayGreetingKataService.Tests.csproj", "{4E7F43E2-3792-45F0-A068-296FDA2DC58A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirthdayGreetingKataService.Tests", "BirthdayGreetingKataService.Tests\BirthdayGreetingKataService.Tests.csproj", "{4E7F43E2-3792-45F0-A068-296FDA2DC58A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBDataInsertionApp", "MongoDBDataInsertionApp\MongoDBDataInsertionApp.csproj", "{26B00AD6-9123-4A0A-BFE4-CF56FEB11B40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4E7F43E2-3792-45F0-A068-296FDA2DC58A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E7F43E2-3792-45F0-A068-296FDA2DC58A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E7F43E2-3792-45F0-A068-296FDA2DC58A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B00AD6-9123-4A0A-BFE4-CF56FEB11B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B00AD6-9123-4A0A-BFE4-CF56FEB11B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B00AD6-9123-4A0A-BFE4-CF56FEB11B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B00AD6-9123-4A0A-BFE4-CF56FEB11B40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
