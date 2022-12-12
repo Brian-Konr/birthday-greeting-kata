@@ -11,7 +11,7 @@ namespace BirthdayGreetingKataService.Tests
     internal class TestCases
     {
 
-        public static IEnumerable<object[]> GetDataForDateFiltering()
+        public static IEnumerable<object[]> GetDataForExistedDateFiltering()
         {
             return new List<object[]>
             {
@@ -44,6 +44,33 @@ namespace BirthdayGreetingKataService.Tests
                         new Response(Constants.MessageTitle, "Happy birthday, dear Peter!")
                     }
                 }
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForNonExistedDateFiltering()
+        {
+            return new List<object[]>
+            {
+                new object[]
+                {
+                    4, 6, new List<Response>()
+                },
+                new object[]
+                {
+                    3, 2, new List<Response>()
+                },
+                new object[]
+                {
+                    8, 29, new List<Response>()
+                },
+                new object[]
+                {
+                    9, 17, new List<Response>()
+                },
+                new object[]
+                {
+                    10, 22, new List<Response>()
+                },
             };
         }
     }

@@ -10,8 +10,8 @@ namespace BirthdayGreetingKataService.Tests
     public class MessageControllerTestsVer1
     {
         [Theory]
-        [MemberData(nameof(TestCases.GetDataForDateFiltering), MemberType = typeof(TestCases))]
-        public void FilterMembers_PassExistedDate_ReturnOkAndCorrectResult(int month, int day, List<Response> expectedResult)
+        [MemberData(nameof(TestCases.GetDataForExistedDateFiltering), MemberType = typeof(TestCases))]
+        public void FilterMembers_PassExistedDate_ReturnOk(int month, int day, List<Response> expectedResult)
         {
             // arrange
             var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
@@ -23,7 +23,20 @@ namespace BirthdayGreetingKataService.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestCases.GetDataForDateFiltering), MemberType = typeof(TestCases))]
+        [MemberData(nameof(TestCases.GetDataForNonExistedDateFiltering), MemberType = typeof(TestCases))]
+        public void FilterMembers_PassNonExistedDate_ReturnNotFound(int month, int day, List<Response> expectedResult)
+        {
+            // arrange
+            var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
+            // act
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day);
+            // assert
+            var notfoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
+            var returnValues = Assert.IsType<List<Response>>(notfoundResult.Value);
+        }
+
+        [Theory]
+        [MemberData(nameof(TestCases.GetDataForExistedDateFiltering), MemberType = typeof(TestCases))]
         public void FilterMembers_PassExistedDate_ReturnCorrectResult(int month, int day, List<Response> expectedResult)
         {
             // arrange
@@ -46,6 +59,20 @@ namespace BirthdayGreetingKataService.Tests
             }
             Assert.Equal(expectedResult.Count, returnValues.Count);
             Assert.Equal(expectedResult.Count, sameCount);
+        }
+
+        [Theory]
+        [MemberData(nameof(TestCases.GetDataForNonExistedDateFiltering), MemberType = typeof(TestCases))]
+        public void FilterMembers_PassNonExistedDate_ReturnEmptyList(int month, int day, List<Response> expectedResult)
+        {
+            // arrange
+            var messageController = new MessageController(new MockDataProvider(), new GreetingMessageGeneratorVer1());
+            // act
+            ActionResult<List<Response>> actionResult = messageController.FilterMembers(month, day);
+            // assert
+            var notFoundResult = actionResult.Result as NotFoundObjectResult;
+            var returnValues = notFoundResult.Value as List<Response>;
+            Assert.Empty(returnValues);
         }
     }
 }
