@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace BirthdayGreetingKataService.Models
 {
@@ -9,6 +10,13 @@ namespace BirthdayGreetingKataService.Models
 
         [JsonPropertyName("content")]
         public string Content { get; set; }
+
+
+        public Response()
+        {
+            Title = string.Empty;
+            Content = string.Empty;
+        }
 
         public Response(string title, string content)
         {
