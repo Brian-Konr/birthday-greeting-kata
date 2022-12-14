@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Npgsql;
 using System.Data;
+using System.Xml.Serialization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,7 +37,23 @@ namespace BirthdayGreetingKataService.Controllers
         {
             List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, gender, isElder);
             List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
-            return responses.Count > 0 ? Ok(responses) : NotFound(responses);
+            //return responses.Count > 0 ? Ok(responses) : NotFound(responses);
+            ResponseWrapper wrapper = new ResponseWrapper(responses);
+            XmlSerializer xmlSerializer= new XmlSerializer(typeof(ResponseWrapper));
+            using StringWriter stringWriter= new StringWriter();
+            xmlSerializer.Serialize(stringWriter, wrapper);
+            string content = stringWriter.ToString();
+            return responses.Count > 0 ?
+                new ContentResult()
+                {
+                    StatusCode = 200,
+                    Content = content
+                } :
+                new ContentResult()
+                {
+                    StatusCode = 404,
+                    Content = content
+                };
         }
     }
 }
