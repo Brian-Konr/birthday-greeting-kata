@@ -1,6 +1,7 @@
 ﻿using BirthdayGreetingKataService.DataProviders;
 using BirthdayGreetingKataService.GreetingMessageGenerators;
 using BirthdayGreetingKataService.Models;
+using BirthdayGreetingKataService.ResultGenerators;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,10 +20,14 @@ namespace BirthdayGreetingKataService.Controllers
         private readonly IDataProvider _dataProvider;
 
         private readonly IGreetingMessageGenerator _messageGenerator;
-        public MessageController(IDataProvider dataProvider, IGreetingMessageGenerator messageGenerator)
+
+        private readonly IResultGenerator _resultGenerator;
+
+        public MessageController(IDataProvider dataProvider, IGreetingMessageGenerator messageGenerator, IResultGenerator resultGenerator)
         {
             _dataProvider = dataProvider;
             _messageGenerator = messageGenerator;
+            _resultGenerator = resultGenerator;
         }
 
         // GET: api/<MessageController>
@@ -37,23 +42,7 @@ namespace BirthdayGreetingKataService.Controllers
         {
             List<Member> selectedMembers = _dataProvider.FilterMembers(month, day, gender, isElder);
             List<Response> responses = selectedMembers.Select(member => _messageGenerator.GenerateGreetingMessage(member)).ToList();
-            //return responses.Count > 0 ? Ok(responses) : NotFound(responses);
-            ResponseWrapper wrapper = new ResponseWrapper(responses);
-            XmlSerializer xmlSerializer= new XmlSerializer(typeof(ResponseWrapper));
-            using StringWriter stringWriter= new StringWriter();
-            xmlSerializer.Serialize(stringWriter, wrapper);
-            string content = stringWriter.ToString();
-            return responses.Count > 0 ?
-                new ContentResult()
-                {
-                    StatusCode = 200,
-                    Content = content
-                } :
-                new ContentResult()
-                {
-                    StatusCode = 404,
-                    Content = content
-                };
+            return _resultGenerator.GenerateResults(responses);
         }
     }
 }

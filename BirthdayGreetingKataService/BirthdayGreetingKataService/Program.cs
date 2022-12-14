@@ -1,5 +1,7 @@
 using BirthdayGreetingKataService.DataProviders;
 using BirthdayGreetingKataService.GreetingMessageGenerators;
+using BirthdayGreetingKataService.ResultGenerators;
+using BirthdayGreetingKataService.Results;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGenerato
 //builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer2>();
 //builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer3>();
 //builder.Services.AddSingleton<IGreetingMessageGenerator, GreetingMessageGeneratorVer4>();
+
+// inject ResultGenerator
+builder.Services.AddSingleton<IResultGenerator, XmlResultGenerator>();
+//builder.Services.AddSingleton<IResultGenerator, JsonResultGenerator>();
 
 var app = builder.Build();
 
