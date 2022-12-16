@@ -5,9 +5,11 @@ namespace BirthdayGreetingKataService.Models
 {
     public class Response
     {
+        [XmlElement(ElementName = "title")]
         [JsonPropertyName("title")]
         public string Title { get; set; }
 
+        [XmlElement(ElementName = "content")]
         [JsonPropertyName("content")]
         public string Content { get; set; }
 
